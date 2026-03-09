@@ -1,0 +1,39 @@
+[project]
+name = "avogadro-mdtraj"
+version = "0.1.0"
+description = "Read MDTraj trajectory files in Avogadro 2"
+authors = [{name = "Geoff Hutchison", email = "geoff.hutchison@gmail.com"}]
+license = "BSD-3-Clause"
+dependencies = ["mdtraj>=1.9", "tables>=3.11.1,<4"]
+requires-python = ">= 3.11"
+
+[project.scripts]
+avogadro-mdtraj = "avogadro_mdtraj:main"
+
+[build-system]
+build-backend = "uv_build"
+requires = ["uv_build>=0.10.2,<0.11.0"]
+
+[tool.avogadro]
+minimum-avogadro-version = "1.103"
+
+[[tool.avogadro.file-formats]]
+identifier = "mdtraj-hdf5"
+format-name = "MDTraj HDF5"
+file-extensions = ["h5", "hdf5"]
+mime-types = ["chemical/x-mdtraj-hdf5"]
+description = "Read MDTraj HDF5 trajectory files"
+support.read = true
+support.write = false
+output-format = "pdb"
+file-mode = "read"
+bond = true
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-arm64"]
+
+[tool.pixi.pypi-dependencies]
+avogadro-mdtraj = { path = ".", editable = true }
+
+[tool.pixi.tasks]
